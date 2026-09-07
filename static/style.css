@@ -1,0 +1,520 @@
+/* ============================================================
+   Credit Ledger — design tokens
+   ============================================================ */
+:root {
+  --bg: #0e141b;
+  --surface: #141d26;
+  --surface-2: #1a2530;
+  --line: #2a3743;
+  --line-soft: #212c37;
+
+  --ink: #e8ecee;
+  --ink-dim: #8b98a5;
+  --ink-faint: #5c6773;
+
+  --brass: #c7a468;
+  --brass-dim: #8a744f;
+
+  --risk-red: #c1584d;
+  --risk-red-dim: #6e332c;
+  --risk-green: #5f9270;
+  --risk-green-dim: #33513c;
+
+  --serif: "Source Serif 4", Georgia, serif;
+  --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+
+  --radius: 3px;
+}
+
+* { box-sizing: border-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-image:
+    linear-gradient(180deg, rgba(199,164,104,0.05), transparent 220px);
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* ============================================================
+   Masthead
+   ============================================================ */
+.masthead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.masthead__mark {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.masthead__seal {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  fill: none;
+  stroke: var(--brass);
+  stroke-width: 1.2;
+}
+
+.masthead h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: 0.2px;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+
+.masthead__tag {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-dim);
+  max-width: 34ch;
+  line-height: 1.4;
+}
+
+.masthead__status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  white-space: nowrap;
+  margin-top: 6px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  transition: background 0.3s ease;
+}
+.dot.ok { background: var(--risk-green); }
+.dot.down { background: var(--risk-red); }
+
+/* ============================================================
+   Ledger form
+   ============================================================ */
+.ledger {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.ledger__section {
+  border: none;
+  border-bottom: 1px solid var(--line);
+  margin: 0;
+  padding: 22px 24px 8px;
+}
+
+.ledger__section:last-of-type {
+  border-bottom: none;
+}
+
+.ledger__section legend {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--brass);
+  padding: 0;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line-soft);
+}
+
+.ledger__section .row:first-of-type {
+  border-top: none;
+}
+
+.row label {
+  font-size: 13.5px;
+  color: var(--ink-dim);
+  flex: 1 1 auto;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.field input,
+.field select {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13.5px;
+  padding: 7px 10px;
+  width: 130px;
+  text-align: right;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field select {
+  text-align: left;
+  width: 170px;
+  font-family: var(--sans);
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0 L5 6 L10 0 Z' fill='%238b98a5'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 26px;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--brass);
+  box-shadow: 0 0 0 3px rgba(199, 164, 104, 0.18);
+}
+
+.field input::-webkit-outer-spin-button,
+.field input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.unit {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+  min-width: 34px;
+}
+
+.unit--prefix { min-width: auto; }
+
+.hint {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  margin: 0 0 16px;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   Submit
+   ============================================================ */
+.submit-row {
+  padding: 26px 4px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+button#submitBtn {
+  position: relative;
+  background: var(--brass);
+  color: #16130c;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 13px 40px;
+  cursor: pointer;
+  letter-spacing: 0.2px;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+button#submitBtn:hover { background: #d4b47a; }
+button#submitBtn:active { transform: translateY(1px); }
+
+button#submitBtn:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+}
+
+button#submitBtn:disabled {
+  opacity: 0.75;
+  cursor: progress;
+}
+
+.btn-spinner {
+  display: none;
+  width: 13px;
+  height: 13px;
+  margin-left: 10px;
+  border: 2px solid rgba(22,19,12,0.35);
+  border-top-color: #16130c;
+  border-radius: 50%;
+  vertical-align: -2px;
+}
+
+button#submitBtn.loading .btn-spinner {
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
+}
+
+button#submitBtn.loading .btn-label { opacity: 0.85; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-note {
+  color: var(--risk-red);
+  font-size: 12.5px;
+  text-align: center;
+  max-width: 40ch;
+  margin: 0;
+}
+
+/* ============================================================
+   Verdict panel
+   ============================================================ */
+.verdict {
+  margin-top: 36px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+}
+
+.verdict__inner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.verdict__gauge {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  flex-shrink: 0;
+  margin: 0 auto;
+}
+
+.gauge {
+  width: 100%;
+  height: 100%;
+  transform: rotate(0deg);
+}
+
+.gauge__track {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 10;
+}
+
+.gauge__fill {
+  fill: none;
+  stroke: var(--brass);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transform-origin: 100px 100px;
+  transform: rotate(-90deg);
+  stroke-dasharray: 540.35;
+  stroke-dashoffset: 540.35;
+  transition: stroke-dashoffset 1.1s cubic-bezier(0.22, 1, 0.36, 1), stroke 0.4s ease;
+}
+
+.gauge__threshold {
+  stroke: var(--ink-faint);
+  stroke-width: 2;
+  transform-origin: 100px 100px;
+}
+
+.gauge__readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge__number {
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.gauge__percent {
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--ink-dim);
+  margin-left: 1px;
+}
+
+.gauge__caption {
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+  letter-spacing: 0.2px;
+}
+
+.verdict__detail {
+  flex: 1 1 220px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.stamp-wrap {
+  flex-shrink: 0;
+  width: 108px;
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stamp {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  border: 2.5px solid var(--risk-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--risk-green);
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transform: scale(1.5) rotate(0deg);
+  opacity: 0;
+  box-shadow: inset 0 0 0 4px rgba(95, 146, 112, 0.15);
+  transition: none;
+}
+
+.stamp::before {
+  content: "";
+  position: absolute;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  border: 1px dashed currentColor;
+  opacity: 0.45;
+}
+
+.stamp.stamp--in {
+  animation: stampSlam 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards;
+}
+
+.stamp.risk-high {
+  border-color: var(--risk-red);
+  color: var(--risk-red);
+  box-shadow: inset 0 0 0 4px rgba(193, 88, 77, 0.15);
+}
+
+@keyframes stampSlam {
+  0%   { transform: scale(1.6) rotate(8deg); opacity: 0; }
+  60%  { transform: scale(0.94) rotate(-6deg); opacity: 1; }
+  80%  { transform: scale(1.04) rotate(-8deg); }
+  100% { transform: scale(1) rotate(-7deg); opacity: 1; }
+}
+
+.ledger-facts {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  min-width: 180px;
+}
+
+.ledger-facts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line-soft);
+  padding-bottom: 8px;
+}
+
+.ledger-facts dt {
+  font-size: 12px;
+  color: var(--ink-dim);
+}
+
+.ledger-facts dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink);
+  text-align: right;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.foot {
+  text-align: center;
+  margin-top: 28px;
+}
+
+.foot p {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 520px) {
+  .page { padding: 32px 16px 64px; }
+
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .field { width: 100%; }
+  .field input, .field select { width: 100%; }
+
+  .verdict__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .verdict__detail {
+    justify-content: center;
+    text-align: left;
+  }
+}
